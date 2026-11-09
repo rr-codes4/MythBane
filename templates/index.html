@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MYTHBANE // CORE — Conspiracy Intelligence & Debunking Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-obsidian: #050505;
+            --panel-bg: #0a0a0c;
+            --border-slate: #222228;
+            --cyan-arctic: #00F2FE;
+            --cyan-glow: rgba(0, 242, 254, 0.15);
+            --laser-red: #FF3366;
+            --text-main: #e0e0e6;
+            --text-muted: #888899;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background-color: var(--bg-obsidian);
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+        }
+
+        header {
+            border-bottom: 1px solid var(--border-slate);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .logo-area h1 {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 28px;
+            letter-spacing: 2px;
+            color: #ffffff;
+        }
+
+        .logo-area h1 span {
+            color: var(--cyan-arctic);
+            text-shadow: 0 0 10px var(--cyan-glow);
+        }
+
+        .system-status {
+            font-size: 11px;
+            color: var(--cyan-arctic);
+            border: 1px solid var(--border-slate);
+            padding: 4px 8px;
+            background: rgba(0, 242, 254, 0.03);
+            letter-spacing: 1px;
+        }
+
+        .terminal-panel, .report-dashboard {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-slate);
+            padding: 25px;
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .terminal-panel::before {
+            content: "INPUT // TELEMETRY_TARGET";
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            background: var(--bg-obsidian);
+            padding: 0 8px;
+            font-size: 10px;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+        }
+
+        .report-dashboard::before {
+            content: "OUTPUT // ANALYSIS_REPORT";
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            background: var(--bg-obsidian);
+            padding: 0 8px;
+            font-size: 10px;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 90px;
+            background: #030304;
+            color: var(--cyan-arctic);
+            border: 1px solid var(--border-slate);
+            padding: 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            resize: vertical;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        textarea:focus {
+            border-color: var(--cyan-arctic);
+            box-shadow: 0 0 10px var(--cyan-glow);
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .hint {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        button {
+            background: transparent;
+            color: var(--cyan-arctic);
+            border: 1px solid var(--cyan-arctic);
+            padding: 10px 24px;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            font-size: 12px;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        button:hover {
+            background: var(--cyan-arctic);
+            color: var(--bg-obsidian);
+            box-shadow: 0 0 15px var(--cyan-glow);
+        }
+
+        .loading {
+            display: none;
+            font-size: 12px;
+            color: var(--cyan-arctic);
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { opacity: 0.3; }
+        }
+
+        .report-dashboard { display: none; }
+
+        .verdict-banner {
+            font-family: 'Syne', sans-serif;
+            font-size: 20px;
+            font-weight: 800;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            border-left: 4px solid;
+            letter-spacing: 1px;
+        }
+
+        .verdict-true { background: rgba(0, 242, 254, 0.05); color: var(--cyan-arctic); border-color: var(--cyan-arctic); }
+        .verdict-false { background: rgba(255, 51, 102, 0.05); color: var(--laser-red); border-color: var(--laser-red); }
+
+        .data-group {
+            margin-bottom: 15px;
+            font-size: 13px;
+        }
+
+        .data-label {
+            color: var(--text-muted);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .data-value {
+            color: var(--text-main);
+            line-height: 1.5;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            position: relative;
+            padding-left: 15px;
+            margin-bottom: 4px;
+            color: var(--text-main);
+            font-size: 12px;
+        }
+
+        ul li::before {
+            content: ">";
+            position: absolute;
+            left: 0;
+            color: var(--cyan-arctic);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <div class="logo-area">
+                <h1>MYTH <span>// BANE</span></h1>
+            </div>
+            <div class="system-status">SYS_STATUS: ONLINE</div>
+        </header>
+
+        <div class="terminal-panel">
+            <textarea id="queryInput" placeholder="Enter conspiracy theory, myth, or rumor for telemetry evaluation..."></textarea>
+            <div class="controls">
+                <span class="hint">MYTHBANE_AGENT // ACTIVE</span>
+                <button onclick="sendQuery()">EXECUTE EVALUATION</button>
+            </div>
+        </div>
+
+        <div id="loading" class="loading">INITIATING DEEP WEB AND ARCHIVE SCAN... PLEASE WAIT...</div>
+
+        <div id="reportDashboard" class="report-dashboard">
+            <div id="verdictBanner" class="verdict-banner"></div>
+            
+            <div class="data-group">
+                <div class="data-label">Target Rumor</div>
+                <div id="resRumor" class="data-value"></div>
+            </div>
+
+            <div class="data-group">
+                <div class="data-label">Intelligence Summary</div>
+                <div id="resSummary" class="data-value"></div>
+            </div>
+
+            <div class="data-group">
+                <div class="data-label">Cross-Referenced Sources</div>
+                <ul id="resSources"></ul>
+            </div>
+
+            <div class="data-group">
+                <div class="data-label">Telemetry Tools Utilized</div>
+                <ul id="resTools"></ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function sendQuery() {
+            const query = document.getElementById('queryInput').value;
+            if (!query) return;
+
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('reportDashboard').style.display = 'none';
+
+            try {
+                const response = await fetch('/debunk', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ query: query })
+                });
+
+                const data = await response.json();
+                document.getElementById('loading').style.display = 'none';
+
+                if (data.error) {
+                    alert(data.error);
+                    return;
+                }
+
+                const banner = document.getElementById('verdictBanner');
+                banner.innerText = "VERDICT // " + data.verdict;
+                
+                const lowerVerdict = data.verdict.toLowerCase();
+                if (lowerVerdict.includes("true") || lowerVerdict.includes("plausible")) {
+                    banner.className = "verdict-banner verdict-true";
+                } else {
+                    banner.className = "verdict-banner verdict-false";
+                }
+
+                document.getElementById('resRumor').innerText = data.rumor;
+                document.getElementById('resSummary').innerText = data.summary;
+
+                const sourcesList = document.getElementById('resSources');
+                sourcesList.innerHTML = '';
+                if (data.sources && data.sources.length > 0) {
+                    data.sources.forEach(s => {
+                        let li = document.createElement('li');
+                        li.innerText = s;
+                        sourcesList.appendChild(li);
+                    });
+                } else {
+                    let li = document.createElement('li');
+                    li.innerText = "No external web sources logged.";
+                    sourcesList.appendChild(li);
+                }
+
+                const toolsList = document.getElementById('resTools');
+                toolsList.innerHTML = '';
+                if (data.tool_used && data.tool_used.length > 0) {
+                    data.tool_used.forEach(t => {
+                        let li = document.createElement('li');
+                        li.innerText = t;
+                        toolsList.appendChild(li);
+                    });
+                } else {
+                    let li = document.createElement('li');
+                    li.innerText = "Internal neural weights only.";
+                    toolsList.appendChild(li);
+                }
+
+                document.getElementById('reportDashboard').style.display = 'block';
+
+            } catch (err) {
+                document.getElementById('loading').style.display = 'none';
+                alert("Critical network failure reaching local backend router.");
+            }
+        }
+    </script>
+</body>
+</html>

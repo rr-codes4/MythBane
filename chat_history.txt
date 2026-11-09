@@ -1,0 +1,51 @@
+Question: will AI replace HUmans
+Date/time: 2026-11-09T11:46:25+05:30
+Rumor: Will AI replace humans?
+Verdict: False
+Summary: While AI is expected to significantly change the workforce and may automate certain tasks, it is unlikely to completely replace humans. Instead, AI is more likely to augment human capabilities and create new job opportunities. The integration of AI into various industries raises questions about job security, but it also presents opportunities for innovation and new roles that require human skills such as creativity, empathy, and critical thinking.
+Sources:
+  - https://www.forbes.com/sites/bernardmarr/2025/04/29/will-ai-replace-humans-in-the-workforce/
+  - https://www.weforum.org/agenda/2025/02/ai-future-of-work/
+Tools used:
+  - Web search for predictions about AI and its impact on employment
+------------------------------------------------------------------------
+
+
+
+
+Question: Are we being watched?
+Date/time: 2026-11-09T12:32:48+05:30
+Rumor: Are we being watched?
+Verdict: False
+Summary: The belief that we are constantly being watched is often rooted in conspiracy theories that lack credible evidence. While there are legitimate concerns about surveillance in public spaces and online tracking by companies, the idea that individuals are being monitored without their knowledge by governments or corporations is largely speculative. Mainstream sources emphasize that claims of widespread surveillance often rely on anecdotal evidence and lack verifiable proof.
+Sources:
+  - https://www.wired.com/story/are-we-being-watched/
+  - https://en.wikipedia.org/wiki/Surveillance
+Tools used:
+  - Web search
+  - Wikipedia search
+------------------------------------------------------------------------
+Question: Is the moon landing a hoax
+
+Date/time: 2026-11-09T17:10:35+05:30
+Rumor: The moon landing is a hoax.
+Verdict: False
+Summary: The claim that the moon landing was a hoax is a conspiracy theory that lacks credible evidence. Numerous rebuttals exist, including high-definition images from the Lunar Reconnaissance Orbiter showing the Apollo landing sites and the equipment left behind. Experts in science and astronomy consider these hoax claims to be pseudoscience. Opinion polls indicate that a small percentage of people believe in this theory, but it is widely discredited by the scientific community.
+Sources:
+  - Wikipedia: Moon landing conspiracy theories
+Tools used:
+  - Wikipedia search
+  - Web search
+------------------------------------------------------------------------
+Question: Are reptillions real
+
+Date/time: 2026-11-09T17:22:45+05:30
+Rumor: Are reptilians real
+Verdict: False
+Summary: The concept of reptilians, or reptoid aliens, is a conspiracy theory that suggests that shape-shifting reptilian aliens control the Earth by taking on human form and infiltrating governments and other institutions. There is no credible scientific evidence to support the existence of such beings. The idea is largely considered a myth and is often associated with various conspiracy theories without any factual basis. Live sources could not be checked for further verification.
+Sources:
+  -Didn't find any relevant sources or tools used.
+Tools used:
+  - web search
+  - Wikipedia search
+------------------------------------------------------------------------
