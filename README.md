@@ -78,5 +78,5 @@ MythBane
       requirements.txt
       resources.py
       
-I have used AI in debugging and code generation.As I am not experienced in frontend I have used AI to make the frontend.
+
 
